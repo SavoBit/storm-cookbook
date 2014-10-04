@@ -16,5 +16,6 @@ setuid <%= @storm_user %>
 chdir <%= @storm_home %>
 
 env RACK_ENV=production
+env JAVA_SERVICE_NAME="-Dservice=storm-<%= @storm_service %>"
 
 exec <%= @storm_home %>/bin/storm <%= @storm_service %> >> /var/log/storm/<%= @storm_service %>.log 2>&1
