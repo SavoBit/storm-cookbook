@@ -18,6 +18,6 @@ nimbus.host: "<%= node[:storm][:nimbus][:host] %>"
 <%= render "nimbus.yaml.erb" -%>
 <% end -%>
 <% if node[:storm][:supervisor].has_key?(:is_supervisor_host) -%>
-<%= render "nimbus.yaml.erb" -%>
+<%= render "supervisor.yaml.erb" -%>
 <% end -%>
 ###########
