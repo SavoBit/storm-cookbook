@@ -19,7 +19,7 @@ bash "Storm install" do
   cwd "/home/#{node[:storm][:deploy][:user]}"
   code <<-EOH
   mkdir storm-data || true
-  wget http://apache.mirror.iweb.ca/incubator/storm/apache-storm-#{node[:storm][:version]}/apache-storm-#{node[:storm][:version]}.zip
+  wget #{node[:storm][:zip_url]}
   unzip apache-storm-#{node[:storm][:version]}.zip
   cd apache-storm-#{node[:storm][:version]}
   EOH

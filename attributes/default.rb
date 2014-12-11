@@ -14,3 +14,5 @@ default[:storm][:ui][:childopts] = "-Xmx512m -Djava.net.preferIPv4Stack=true"
 
 default[:storm][:version] = "0.9.1-incubating"
 
+default[:storm][:zip_url] = "http://apache.mirror.iweb.ca/storm/apache-storm-#{node[:storm][:version]}/apache-storm-#{node[:storm][:version]}.zip"
+
