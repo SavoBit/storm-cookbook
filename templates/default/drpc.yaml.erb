@@ -4,5 +4,5 @@ storm.zookeeper.servers:
 - "<%= host %>"
 <% end %>
 
-storm.local.dir: "<%= node[:storm][:deploy][:storm_dir] %>/storm-data"
+storm.local.dir: "<%= node[:storm][:deploy][:local_dir] %>"
 java.library.path: node[:storm][:java][:library_path]

@@ -11,6 +11,7 @@ default[:storm][:zip_url] = "http://apache.mirror.iweb.ca/storm/apache-storm-#{n
 default[:storm][:deploy][:user] = ::File.exists?("/home/vagrant") ? "vagrant" : "ubuntu"
 default[:storm][:deploy][:group] = ::File.exists?("/home/vagrant") ? "vagrant" : "ubuntu"
 default[:storm][:deploy][:storm_dir] = "/opt/storm"
+default[:storm][:deploy][:local_dir] = "/opt/storm/storm-data"
 default[:storm][:deploy][:log_dir] = "/var/log/storm"
 
 default[:storm][:nimbus][:host] = "192.168.42.10"

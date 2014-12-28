@@ -6,6 +6,16 @@ This file is used to list changes made in each version of storm-project.
 
 * Initial release of storm-project
 
+## 0.3.0
+
+- rberger - Make things a bit more general an parameterized
+-- Added comment headers to all recipes and attribute files
+-- Made the top level directory an attribute node[:storm][:deploy][:storm_dir]
+-- Made the log dir an attribute
+-- Defaulted to version 0.9.3
+-- Set Version to 0.3.0
+-- Parameterized storm.local.dir
+
 - - - 
 Check the [Markdown Syntax Guide](http://daringfireball.net/projects/markdown/syntax) for help with Markdown.
 
