@@ -1,11 +1,10 @@
+# Encoding: utf-8
 #
-# Cookbook Name:: storm-project
+# Cookbook Name:: storm
 # Recipe:: default
 #
-# Copyright 2012, YOUR_COMPANY_NAME
-#
-# All rights reserved - Do Not Redistribute
-#
+
+storm_dir = node[:storm][:deploy][:storm_dir]
 
 %w[ curl unzip build-essential pkg-config libtool autoconf git-core uuid-dev python-dev ].each do |pkg|
     package pkg do
@@ -16,7 +15,7 @@ end
 
 bash "Storm install" do
   user node[:storm][:deploy][:user]
-  cwd "/home/#{node[:storm][:deploy][:user]}"
+  cwd storm_dir
   code <<-EOH
   mkdir storm-data || true
   wget #{node[:storm][:zip_url]}
@@ -24,7 +23,7 @@ bash "Storm install" do
   cd apache-storm-#{node[:storm][:version]}
   EOH
   not_if do
-    ::File.exists?("/home/#{node[:storm][:deploy][:user]}/apache-storm-#{node[:storm][:version]}")
+    ::File.exists?("#{storm_dir}/apache-storm-#{node[:storm][:version]}")
   end
 end
 
@@ -33,7 +32,7 @@ execute "reload upstart configuration" do
   action :nothing
 end
 
-directory "/var/log/storm" do
+directory node[:storm][:deploy][:log_dir] do
   owner node.storm.deploy.user
   group node.storm.deploy.user
   recursive true

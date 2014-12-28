@@ -1,3 +1,9 @@
+# Encoding: utf-8
+#
+# Cookbook Name:: storm
+# Recipe:: ui
+#
+
 include_recipe "storm"
 
 node.set[:storm][:ui][:is_ui_host] = true
@@ -20,7 +26,7 @@ end
 logrotate_app "storm-ui" do
   frequency "daily"
   cookbook "logrotate"
-  path "/var/log/storm/ui.log"
+  path "#{node[:storm][:deploy][:log_dir]}/ui.log"
   rotate 30
   create "640 #{node.storm.deploy.user} #{node.storm.deploy.user}"
 end

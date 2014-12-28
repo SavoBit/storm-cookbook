@@ -6,8 +6,8 @@ storm.zookeeper.servers:
 - "<%= host %>"
 <% end %>
 
-storm.local.dir: "/home/<%= node[:storm][:deploy][:user] %>/storm-data"
-java.library.path: "/usr/local/lib"
+storm.local.dir: "<%= node[:storm][:deploy][:storm_dir] %>/storm-data"
+java.library.path: node[:storm][:java][:library_path]
 
 nimbus.host: "<%= node[:storm][:nimbus][:host] %>"
 
