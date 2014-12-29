@@ -6,13 +6,14 @@ and added/cleaned some options. I am using this cookbook with Chef Solo and Vagr
 Lots of modifications are still required to put this cookbook in better shape.
 
 This cookbook will install the following:
-- Zookeeper, current Ubuntu package
-- Storm 0.9.1-incubating by default but configurable
+- Storm 0.9.3 by default but configurable
+- logrotate
 
 # Requirement
 
 - Ubuntu Linux
 - Java 1.7 need to be installed. I suggest this [Java cookbook](git://github.com/opscode-cookbooks/java.git)
+- Zookeeper Cluster
 
 # Recipes
 
@@ -21,28 +22,25 @@ This cookbook will install the following:
 - storm::supervisor
 - storm::ui
 - storm::drpc
+- storm::config
 
 The `storm::singlenode` recipe installs nimbus, supervisor, drpc and ui on the same node.
 
 # Default options
 
-```
-default[:storm][:version] = "0.9.1-incubating"
+You must override or set the following in some manner such as in a
+role, wrapper / application cookbook before running any recipe other
+than storm::singlenode:
 
-default[:storm][:deploy][:user] = ::File.exists?("/home/vagrant") ? "vagrant" : "ubuntu"
-default[:storm][:deploy][:group] = ::File.exists?("/home/vagrant") ? "vagrant" : "ubuntu"
+* Array of zookeeper FQDN or IP addresses  
+  `default[:storm][:zookeeper][:hosts]`
+* Single FQDN or IP of nimbus host  
+  `default[:storm][:nimbus][:host]`
+* Array of supervisor FQDN or IP addresses  
+  `default[:storm][:supervisor][:hosts]`
 
-default[:storm][:nimbus][:host] = "192.168.42.10"
-default[:storm][:supervisor][:hosts] = [ "192.168.42.20" ]
 
-default[:storm][:nimbus][:childopts] = "-Xmx512m -Djava.net.preferIPv4Stack=true"
-
-default[:storm][:supervisor][:childopts] = "-Xmx512m -Djava.net.preferIPv4Stack=true"
-default[:storm][:supervisor][:workerports] = (6700..6706).to_a
-default[:storm][:worker][:childopts] = "-Xmx512m -Djava.net.preferIPv4Stack=true"
-
-default[:storm][:ui][:childopts] = "-Xmx512m -Djava.net.preferIPv4Stack=true"
-```
+See attributes/default.rb for other attributes that can be set
 
 # Example Vagranfile
 
@@ -57,7 +55,7 @@ chef.json = {
     :oracle => {
       "accept_oracle_download_terms" => true
     },
-    :install_flavor => "openjdk",
+    :install_flavor => "oracle",
     :jdk_version => "7",
   },
 

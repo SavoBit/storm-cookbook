@@ -4,8 +4,8 @@ storm.zookeeper.servers:
 - "<%= host %>"
 <% end %>
 
-storm.local.dir: "/home/<%= node[:storm][:deploy][:user] %>/storm-data"
-java.library.path: "/usr/local/lib"
+storm.local.dir: "<%= node[:storm][:deploy][:local_dir] %>"
+java.library.path: node[:storm][:java][:library_path]
 
 topology.debug: true
 

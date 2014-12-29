@@ -8,6 +8,7 @@ include_recipe "storm"
 
 node.set[:storm][:nimbus][:is_nimbus_host] = true
 
+# Creates storm.yaml and bin_storm.py using attributes
 include_recipe 'storm::config'
 
 storm_dir = node[:storm][:deploy][:storm_dir]

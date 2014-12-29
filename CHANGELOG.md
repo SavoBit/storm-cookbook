@@ -15,6 +15,9 @@ This file is used to list changes made in each version of storm-project.
 -- Defaulted to version 0.9.3
 -- Set Version to 0.3.0
 -- Parameterized storm.local.dir
+-- Parameterized all sotrm variables in templates
+-- Stated that Zookeeper is a requirement
+-- Made it clear that people have to set the addresses for zookeeper cluster, nimbus and supervisers
 
 - - - 
 Check the [Markdown Syntax Guide](http://daringfireball.net/projects/markdown/syntax) for help with Markdown.

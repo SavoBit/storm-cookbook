@@ -8,11 +8,14 @@ include_recipe "storm"
 
 node.set[:storm][:ui][:is_ui_host] = true
 
+# Creates storm.yaml and bin_storm.py using attributes
+include_recipe 'storm::config'
+
 template "/etc/init/storm-ui.conf" do
   source "storm-upstart-conf.erb"
   variables({
     :storm_user => node.storm.deploy.user,
-    :storm_home => "/home/#{node.storm.deploy.user}/apache-storm-#{node.storm.version}",
+    :storm_home => "#{node[:storm][:deploy][:storm_dir]}/apache-storm-#{node.storm.version}",
     :storm_service => "ui"
   })
   notifies :run, "execute[reload upstart configuration]", :immediately

@@ -6,6 +6,11 @@
 
 storm_dir = node[:storm][:deploy][:storm_dir]
 
+Chef::Application.fatal!("node[:storm][:zookeeper][:hosts] is not set by search or override") unless node[:storm][:zookeeper][:hosts]
+Chef::Application.fatal!("node[:storm][:nimbus][:hosts] is not set by search or override") unless node[:storm][:nimbus][:hosts]
+Chef::Application.fatal!("node[:storm][:supervisor][:hosts] is not set by search or override") unless node[:storm][:supervisor][:hosts]
+
+
 %w[ curl unzip build-essential pkg-config libtool autoconf git-core uuid-dev python-dev ].each do |pkg|
     package pkg do
         retries 2

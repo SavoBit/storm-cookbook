@@ -2,8 +2,8 @@
 
 nimbus.childopts: "<%= node[:storm][:nimbus][:childopts] %>"
 
-topology.debug: true
+topology.debug: node[:storm][:nimubs][:topology][:debug]
 
-nimbus.task.launch.secs : 240
-supervisor.worker.start.timeout.secs: 240
-supervisor.worker.timeout.secs: 240
+nimbus.task.launch.secs: node[:storm][:nimbus][:task][:launch][:secs]
+supervisor.worker.start.timeout.secs: node[:storm][:supervisor][:worker][:start][:timeout][:secs]
+supervisor.worker.timeout.secs: node[:storm][:supervisor][:worker][:timeout][:secs]
