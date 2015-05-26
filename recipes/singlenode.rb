@@ -12,6 +12,7 @@ directory node[:storm][:deploy][:storm_dir] do
   owner node.storm.deploy.user
   group node.storm.deploy.user
   recursive true
+  action :create
 end
 
 
