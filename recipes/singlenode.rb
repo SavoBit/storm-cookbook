@@ -8,6 +8,13 @@ include_recipe "storm"
 
 storm_dir = node[:storm][:deploy][:storm_dir]
 
+directory node[:storm][:deploy][:storm_dir] do
+  owner node.storm.deploy.user
+  group node.storm.deploy.user
+  recursive true
+end
+
+
 template "Storm conf file" do
   path "#{storm_dir}/apache-storm-#{node[:storm][:version]}/conf/storm.yaml"
   source "singlenode.yaml.erb"
