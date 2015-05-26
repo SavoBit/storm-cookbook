@@ -18,6 +18,14 @@ Chef::Application.fatal!("node[:storm][:supervisor][:hosts] is not set by search
     end
 end
 
+directory node[:storm][:deploy][:storm_dir] do
+  owner node.storm.deploy.user
+  group node.storm.deploy.user
+  recursive true
+  action :create
+end
+
+
 bash "Storm install" do
   user node[:storm][:deploy][:user]
   cwd storm_dir
