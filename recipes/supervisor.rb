@@ -22,6 +22,9 @@ template "/etc/init/storm-supervisor.conf" do
   notifies :run, "execute[reload upstart configuration]", :immediately
 end
 
+include_recipe 'storm::config'
+
+
 service "storm-supervisor" do
   provider Chef::Provider::Service::Upstart
   action [:enable, :start]

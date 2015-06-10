@@ -40,6 +40,8 @@ bash "Storm install" do
   end
 end
 
+include_recipe 'storm::config'
+
 execute "reload upstart configuration" do
   command "initctl reload-configuration"
   action :nothing
