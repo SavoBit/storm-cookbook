@@ -8,14 +8,6 @@ include_recipe "storm"
 
 storm_dir = node[:storm][:deploy][:storm_dir]
 
-template "Storm conf file" do
-  path "#{storm_dir}/apache-storm-#{node[:storm][:version]}/conf/storm.yaml"
-  source "drpc.yaml.erb"
-  owner node[:storm][:deploy][:user]
-  group node[:storm][:deploy][:group]
-  mode 0644
-end
-
 template "/etc/init/storm-drpc.conf" do
   source "storm-upstart-conf.erb"
   variables({
