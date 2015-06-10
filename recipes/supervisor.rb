@@ -10,12 +10,13 @@ node.set[:storm][:supervisor][:is_supervisor_host] = true
 
 include_recipe 'storm::config'
 
+storm_dir = node[:storm][:deploy][:storm_dir]
 
 template "/etc/init/storm-supervisor.conf" do
   source "storm-upstart-conf.erb"
   variables({
     :storm_user => node.storm.deploy.user,
-    :storm_home => "/home/#{node.storm.deploy.user}/apache-storm-#{node.storm.version}",
+    :storm_home => "#{storm_dir}/apache-storm-#{node.storm.version}",
     :storm_service => "supervisor"
   })
   notifies :run, "execute[reload upstart configuration]", :immediately
