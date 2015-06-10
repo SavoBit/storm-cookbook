@@ -2,3 +2,7 @@
 
 nimbus.childopts: "<%= node[:storm][:nimbus][:childopts] %>"
 
+supervisor.slots.ports:
+<% node[:storm][:supervisor][:workerports].each do |port| %>
+  - <%= port %>
+<% end %>
