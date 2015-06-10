@@ -32,7 +32,7 @@ default[:storm][:supervisor][:worker][:start][:timeout][:secs] = 240
 default[:storm][:supervisor][:worker][:timeout][:secs] = 240
 
 default[:storm][:supervisor][:childopts] = "-Xmx512m -Djava.net.preferIPv4Stack=true"
-default[:storm][:supervisor][:workerports] = (6700..6706).to_a
+default[:storm][:supervisor][:workerports] = (6700..6713).to_a
 
 default[:storm][:worker][:childopts] = "-Xmx512m -Djava.net.preferIPv4Stack=true"
 
