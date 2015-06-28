@@ -14,9 +14,3 @@ template "Storm conf file" do
   mode 0644
 end
 
-template "#{storm_dir}/apache-storm-#{node.storm.version}/bin/storm" do
-  source "bin_storm.py.erb"
-  owner node[:storm][:deploy][:user]
-  group node[:storm][:deploy][:group]
-  mode 0755
-end
