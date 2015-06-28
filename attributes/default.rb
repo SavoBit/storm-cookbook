@@ -6,7 +6,7 @@
 #
 
 default[:storm][:version] = "0.9.5"
-default[:storm][:zip_url] = "http://apache.mirror.iweb.ca/storm/apache-storm-#{node[:storm][:version]}/apache-storm-#{node[:storm][:version]}.zip"
+default[:storm][:zip_url] = "http://mirrors.advancedhosters.com/storm/apache-storm-#{node[:storm][:version]}/apache-storm-#{node[:storm][:version]}.zip"
 
 default[:storm][:deploy][:user] = ::File.exists?("/home/vagrant") ? "vagrant" : "ubuntu"
 default[:storm][:deploy][:group] = ::File.exists?("/home/vagrant") ? "vagrant" : "ubuntu"
