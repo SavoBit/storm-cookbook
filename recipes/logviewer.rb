@@ -3,7 +3,7 @@ storm_dir = node[:storm][:deploy][:storm_dir]
 template "/etc/init/storm-logviewer.conf" do
   source "storm-upstart-conf.erb"
   variables({
-    :storm_user => "root",
+    :storm_user => node.storm.deploy.user,
     :storm_home => "#{storm_dir}/apache-storm-#{node.storm.version}",
     :storm_service => "logviewer"
   })
