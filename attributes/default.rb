@@ -39,3 +39,7 @@ default[:storm][:worker][:childopts] = "-Xmx512m -Djava.net.preferIPv4Stack=true
 default[:storm][:ui][:childopts] = "-Xmx512m -Djava.net.preferIPv4Stack=true"
 
 default[:storm][:java][:library_path] = "/usr/local/lib"
+
+default[:storm][:logstash_host] = nil
+
+default[:storm][:logstash_port] = nil

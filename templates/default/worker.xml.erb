@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<configuration monitorInterval="60">
+<properties>
+    <property name="pattern">%d{yyyy-MM-dd HH:mm:ss.SSS} %c{1.} [%p] %msg%n</property>
+    <property name="patternNoTime">%msg%n</property>
+</properties>
+<appenders>
+   <Socket name="elk" host="<%= @logstash_host %>" port="<%= @logstash_port %>">
+      <SerializedLayout />
+    </Socket>
+
+    <RollingFile name="A1"
+                 fileName="${sys:storm.home}/logs/${sys:logfile.name}"
+                 filePattern="${sys:storm.home}/logs/${sys:logfile.name}.%i.gz">
+        <PatternLayout>
+            <pattern>${pattern}</pattern>
+        </PatternLayout>
+        <Policies>
+            <SizeBasedTriggeringPolicy size="100 MB"/> <!-- Or every 100 MB -->
+            <DefaultRolloverStrategy max="9"/>
+        </Policies>
+    </RollingFile>
+    <RollingFile name="STDOUT"
+                 fileName="${sys:storm.home}/logs/${sys:logfile.name}.out"
+                 filePattern="${sys:storm.home}/logs/${sys:logfile.name}.out.%i.gz">
+        <PatternLayout>
+            <pattern>${patternNoTime}</pattern>
+        </PatternLayout>
+        <Policies>
+            <SizeBasedTriggeringPolicy size="100 MB"/> <!-- Or every 100 MB -->
+            <DefaultRolloverStrategy max="4"/>
+        </Policies>
+    </RollingFile>
+    <RollingFile name="STDERR"
+                 fileName="${sys:storm.home}/logs/${sys:logfile.name}.err"
+                 filePattern="${sys:storm.home}/logs/${sys:logfile.name}.err.%i.gz">
+        <PatternLayout>
+            <pattern>${patternNoTime}</pattern>
+        </PatternLayout>
+        <Policies>
+            <SizeBasedTriggeringPolicy size="100 MB"/> <!-- Or every 100 MB -->
+            <DefaultRolloverStrategy max="4"/>
+        </Policies>
+    </RollingFile>
+    <Syslog name="syslog" format="RFC5424" host="localhost" port="514"
+        protocol="UDP" appName="[${sys:storm.id}:${sys:worker.port}]" mdcId="mdc" includeMDC="true"
+        facility="LOCAL5" enterpriseNumber="18060" newLine="true" exceptionPattern="%rEx{full}"
+        messageId="[${sys:user.name}:${sys:logging.sensitivity}]" id="storm"/>
+</appenders>
+<loggers>
+    <root level="info"> <!-- We log everything -->
+        <appender-ref ref="A1"/>
+        <appender-ref ref="syslog"/>
+        <appender-ref ref="elk"/>
+    </root>
+    <Logger name="STDERR" level="INFO">
+        <appender-ref ref="STDERR"/>
+        <appender-ref ref="syslog"/>
+        <appender-ref ref="elk"/>
+    </Logger>
+    <Logger name="STDOUT" level="INFO">
+        <appender-ref ref="STDOUT"/>
+        <appender-ref ref="syslog"/>
+       <appender-ref ref="elk"/>
+    </Logger>
+</loggers>
+</configuration>
