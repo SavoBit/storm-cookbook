@@ -1,4 +1,6 @@
 
+storm_dir = node[:storm][:deploy][:storm_dir]
+
 template "#{storm_dir}/apache-storm-#{node.storm.version}/log4j2/worker.xml" do
   source "worker.xml.erb"
   variables({
