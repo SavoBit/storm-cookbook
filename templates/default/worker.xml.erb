@@ -10,6 +10,10 @@
       <SerializedLayout />
     </Socket>
 
+    <Async name="Async">
+            <AppenderRef ref="elk"/>
+    </Async>
+
     <RollingFile name="A1"
                  fileName="${sys:storm.home}/logs/${sys:logfile.name}"
                  filePattern="${sys:storm.home}/logs/${sys:logfile.name}.%i.gz">
@@ -52,17 +56,17 @@
     <root level="info"> <!-- We log everything -->
         <appender-ref ref="A1"/>
         <appender-ref ref="syslog"/>
-        <appender-ref ref="elk"/>
+        <appender-ref ref="Async"/>
     </root>
     <Logger name="STDERR" level="INFO">
         <appender-ref ref="STDERR"/>
         <appender-ref ref="syslog"/>
-        <appender-ref ref="elk"/>
+        <appender-ref ref="Async"/>
     </Logger>
     <Logger name="STDOUT" level="INFO">
         <appender-ref ref="STDOUT"/>
         <appender-ref ref="syslog"/>
-       <appender-ref ref="elk"/>
+       <appender-ref ref="Async"/>
     </Logger>
 </loggers>
 </configuration>
