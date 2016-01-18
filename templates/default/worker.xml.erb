@@ -3,11 +3,12 @@
 <configuration monitorInterval="60">
 <properties>
     <property name="pattern">%d{yyyy-MM-dd HH:mm:ss.SSS} %c{1.} [%p] %msg%n</property>
+    <property name="patternDetailed">%d{yyyy-MM-dd HH:mm:ss.SSS} %c{1.} [%p] %method %msg%n</property>
     <property name="patternNoTime">%msg%n</property>
 </properties>
 <appenders>
    <Socket name="elk" host="<%= @logstash_host %>" port="<%= @logstash_port %>">
-      <SerializedLayout />
+       <SerializedLayout />
     </Socket>
 
     <Async name="Async">
@@ -55,17 +56,14 @@
 <loggers>
     <root level="info"> <!-- We log everything -->
         <appender-ref ref="A1"/>
-        <appender-ref ref="syslog"/>
         <appender-ref ref="Async"/>
     </root>
     <Logger name="STDERR" level="INFO">
         <appender-ref ref="STDERR"/>
-        <appender-ref ref="syslog"/>
         <appender-ref ref="Async"/>
     </Logger>
     <Logger name="STDOUT" level="INFO">
         <appender-ref ref="STDOUT"/>
-        <appender-ref ref="syslog"/>
        <appender-ref ref="Async"/>
     </Logger>
 </loggers>
