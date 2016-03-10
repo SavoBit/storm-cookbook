@@ -6,10 +6,6 @@
     <property name="patternNoTime">%msg%n</property>
 </properties>
 <appenders>
-   <Socket name="elk" host="<%= @logstash_host %>" port="<%= @logstash_port %>">
-      <SerializedLayout />
-    </Socket>
-
     <RollingFile name="A1"
                  fileName="${sys:storm.home}/logs/${sys:logfile.name}"
                  filePattern="${sys:storm.home}/logs/${sys:logfile.name}.%i.gz">
@@ -52,17 +48,14 @@
     <root level="info"> <!-- We log everything -->
         <appender-ref ref="A1"/>
         <appender-ref ref="syslog"/>
-        <appender-ref ref="elk"/>
     </root>
     <Logger name="STDERR" level="INFO">
         <appender-ref ref="STDERR"/>
         <appender-ref ref="syslog"/>
-        <appender-ref ref="elk"/>
     </Logger>
     <Logger name="STDOUT" level="INFO">
         <appender-ref ref="STDOUT"/>
         <appender-ref ref="syslog"/>
-       <appender-ref ref="elk"/>
     </Logger>
 </loggers>
 </configuration>
