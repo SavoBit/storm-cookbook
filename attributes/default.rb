@@ -43,3 +43,5 @@ default[:storm][:java][:library_path] = "/usr/local/lib"
 default[:storm][:logstash_host] = nil
 
 default[:storm][:logstash_port] = nil
+
+default[:storm][:topology][:max_spout_pending] = nil
