@@ -10,6 +10,7 @@ storm.local.dir: "<%= node[:storm][:deploy][:local_dir] %>"
 java.library.path: "<%= node[:storm][:java][:library_path] %>"
 
 nimbus.host: "<%= node[:storm][:nimbus][:host] %>"
+nimbus.seeds: <%= node[:storm][:nimbus][:seeds] %>
 
 topology.max.spout.pending: <%= node[:storm][:topology][:max_spout_pending] %>
 

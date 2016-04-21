@@ -15,11 +15,11 @@ default[:storm][:deploy][:local_dir] = "/opt/storm/storm-data"
 default[:storm][:deploy][:log_dir] = "/var/log/storm"
 
 #
-# Set these somewhere before the default recipe is called 
+# Set these somewhere before the default recipe is called
 # You can use search or statically set them in a wrapper/application reciepe
 #
 # Array of zookeeper FQDN or IP addresses
-default[:storm][:zookeeper][:hosts] = nil 
+default[:storm][:zookeeper][:hosts] = nil
 # Single FQDN or IP of nimbus host
 default[:storm][:nimbus][:host] = nil
 # Array of supervisor FQDN or IP addresses
@@ -45,3 +45,5 @@ default[:storm][:logstash_host] = nil
 default[:storm][:logstash_port] = nil
 
 default[:storm][:topology][:max_spout_pending] = nil
+
+default[:storm][:nimbus][:seeds] = nil
